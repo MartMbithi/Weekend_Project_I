@@ -177,7 +177,7 @@ require_once('partials/head.php');
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_subject" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_class" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
