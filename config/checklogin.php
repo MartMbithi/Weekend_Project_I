@@ -1,10 +1,15 @@
 <?php
 /*
- * Created on Wed Oct 13 2021
+ * Created on Sat Dec 11 2021
+ *
+ *  Devlan - devlan.co.ke 
+ *
+ * hello@devlan.info
+ *
  *
  * The Devlan End User License Agreement
- * Copyright (c) 2021 DevLan
  *
+ * Copyright (c) 2021 Devlan
  *
  * 1. GRANT OF LICENSE
  * Devlan hereby grants to you (an individual) the revocable, personal, non-exclusive, and nontransferable right to
@@ -32,8 +37,8 @@
  * Upon such termination, you agree to destroy the Software, together with all copies thereof.
  *
  * 5. NO OTHER WARRANTIES. 
- * DEVLAN  DOES NOT WARRANT THAT THE SOFTWARE IS ERROR FREE. 
- * DEVLAN SOFTWARE DISCLAIMS ALL OTHER WARRANTIES WITH RESPECT TO THE SOFTWARE, 
+ * Devlan  DOES NOT WARRANT THAT THE SOFTWARE IS ERROR FREE. 
+ * Devlan SOFTWARE DISCLAIMS ALL OTHER WARRANTIES WITH RESPECT TO THE SOFTWARE, 
  * EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. 
  * SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES OR LIMITATIONS
@@ -56,29 +61,16 @@
 
 
 
-/* Staff Checklogin */
+
+/* Register Check Login Functions Here */
 function staff_checklogin()
 {
-	if ((strlen($_SESSION['staff_id']) == 0) && strlen($_SESSION['staff_rank']) == 0
-	) {
+	if ((strlen($_SESSION['admin_id']) == 0) && strlen($_SESSION['admin_email']) == 0) {
 		$host = $_SERVER['HTTP_HOST'];
 		$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		$extra = "../index";
-		$_SESSION["staff_id"] = "";
-		$_SESSION["staff_rank"] = "";
-		header("Location: http://$host$uri/$extra");
-	}
-}
-
-
-/* User Checklogin */
-function client_checklogin()
-{
-	if ((strlen($_SESSION['client_id']) == 0)) {
-		$host = $_SERVER['HTTP_HOST'];
-		$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		$extra = "../index";
-		$_SESSION["client_id"] = "";
+		$extra = "index";
+		$_SESSION["admin_id"] = "";
+		$_SESSION["admin_email"] = "";
 		header("Location: http://$host$uri/$extra");
 	}
 }
