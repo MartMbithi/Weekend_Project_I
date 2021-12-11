@@ -133,13 +133,13 @@ require_once('partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">Subjects</h1>
+                            <h1 class="m-0 text-bold">Classes</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Subjects</li>
+                                <li class="breadcrumb-item active">Classes</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -149,7 +149,7 @@ require_once('partials/head.php');
             <section class="content">
                 <div class="container-fluid">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Subjects</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Class</button>
                     </div>
                     <hr>
                     <!-- Add Modal -->
@@ -167,12 +167,12 @@ require_once('partials/head.php');
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="">Subject Code</label>
-                                                    <input type="text" required name="subject_code" class="form-control">
+                                                    <label for="">Class Code</label>
+                                                    <input type="text" required name="class_code" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label for="">Subject Name</label>
-                                                    <input type="text" required name="subject_name" class="form-control">
+                                                    <label for="">Class Name</label>
+                                                    <input type="text" required name="class_name" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -190,33 +190,33 @@ require_once('partials/head.php');
                             <table id="" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Subject Code</th>
-                                        <th>Subject Name </th>
+                                        <th>Class Code</th>
+                                        <th>Class Name </th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM subject ";
+                                    $ret = "SELECT * FROM class ";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($subject = $res->fetch_object()) {
+                                    while ($class = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $subject->subject_code; ?></td>
-                                            <td><?php echo $subject->subject_name; ?></td>
+                                            <td><?php echo $class->class_code; ?></td>
+                                            <td><?php echo $class->class_name; ?></td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $subject->subject_id; ?>">
+                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $class->class_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $subject->subject_id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $class->class_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
-                                                <div class="modal fade" id="edit-<?php echo $subject->subject_id; ?>">
+                                                <div class="modal fade" id="edit-<?php echo $class->class_id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -230,18 +230,18 @@ require_once('partials/head.php');
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="form-group col-md-12">
-                                                                                <label for=""> Subject Code</label>
-                                                                                <input type="text" required value="<?php echo $subject->subject_code; ?>" name="subject_code" class="form-control">
-                                                                                <input type="hidden" required value="<?php echo $subject->subject_id; ?>" name="subject_id" class="form-control">
+                                                                                <label for=""> Class Code</label>
+                                                                                <input type="text" required value="<?php echo $class->class_code; ?>" name="class_code" class="form-control">
+                                                                                <input type="hidden" required value="<?php echo $class->class_id; ?>" name="class_id" class="form-control">
                                                                             </div>
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="">Subject Name</label>
-                                                                                <input type="text" required name="subject_name" value="<?php echo $subject->subject_name; ?>" class="form-control">
+                                                                                <label for="">Class Name</label>
+                                                                                <input type="text" required name="class_name" value="<?php echo $class->class_name; ?>" class="form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-right">
-                                                                        <button type="submit" name="update_subject" class="btn btn-primary">Submit</button>
+                                                                        <button type="submit" name="update_class" class="btn btn-primary">Submit</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -251,7 +251,7 @@ require_once('partials/head.php');
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $subject->subject_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $class->class_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -262,11 +262,11 @@ require_once('partials/head.php');
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
                                                                 <form method="POST">
-                                                                    <h4>Delete <?php echo $subject->subject_name; ?> ?</h4>
+                                                                    <h4>Delete <?php echo $class->class_name; ?> ?</h4>
                                                                     <br>
-                                                                    <p>Heads Up, You are about to delete <?php echo $subject->subject_name; ?>. This action is irrevisble.</p>
+                                                                    <p>Heads Up, You are about to delete <?php echo $class->class_name; ?>. This action is irrevisble.</p>
                                                                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                    <input type="hidden" name="subject_id" value="<?php echo $subject->subject_id; ?>">
+                                                                    <input type="hidden" name="class_id" value="<?php echo $class->class_id; ?>">
                                                                     <input type="submit" class="text-center btn btn-danger" value="Delete" name="delete">
                                                                 </form>
                                                             </div>
