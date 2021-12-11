@@ -86,7 +86,7 @@ if (isset($_POST['update_subject'])) {
     $subject_name  = $_POST['subject_name'];
 
     /* Log This Transaction */
-    $sql = "UPDATE subejects SET subject_name =?, subject_code =? WHERE subject_id =?";
+    $sql = "UPDATE subject SET subject_name =?, subject_code =? WHERE subject_id =?";
     $prepare  = $mysqli->prepare($sql);
     $bind = $prepare->bind_param('sss', $subject_name, $subject_code, $subject_id);
     $prepare->execute();
@@ -252,6 +252,7 @@ require_once('partials/head.php');
                                                                     <p>Heads Up, You are about to delete <?php echo $subject->subject_name; ?>. This action is irrevisble.</p>
                                                                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
                                                                     <input type="hidden" name="subject_id" value="<?php echo $subject->subject_id; ?>">
+                                                                    <input type="submit" class="text-center btn btn-danger" value="Delete" name="delete">
                                                                 </form>
                                                             </div>
                                                         </div>
