@@ -77,3 +77,20 @@ $stmt->execute();
 $stmt->bind_result($students);
 $stmt->fetch();
 $stmt->close();
+
+/* Classes */
+$query = "SELECT COUNT(*) FROM `class` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($classes);
+$stmt->fetch();
+$stmt->close();
+
+
+/* Subjects */
+$query = "SELECT COUNT(*) FROM `subject` ";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($subjects);
+$stmt->fetch();
+$stmt->close();
