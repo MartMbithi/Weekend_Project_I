@@ -66,7 +66,7 @@
 
 /* System Generated Password */
 $sys_gen_password = substr(
-    str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890qwertyuioplkjhgfdsazxcvbnm"),
+    str_shuffle("1234567890QWERTYUIOPLKJHGFDSAZXCVBNM1234567890qwertyuioplkjhgfdsazxcvbnm"),
     1,
     8
 );
