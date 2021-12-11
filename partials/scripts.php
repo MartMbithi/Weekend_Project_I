@@ -16,8 +16,8 @@
             timer: 3000
         });
         Toast.fire({
-            type: 'error',
-            title: '<?php echo $err; ?>',
+            type: 'success',
+            title: '<?php echo $success; ?>',
         })
     </script>
 
@@ -46,8 +46,8 @@ if (isset($info)) { ?>
             timer: 3000
         });
         Toast.fire({
-            type: 'error',
-            title: '<?php echo $err; ?>',
+            type: 'info',
+            title: '<?php echo $info; ?>',
         })
     </script>
 

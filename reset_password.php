@@ -66,7 +66,7 @@ require_once('config/codeGen.php'); /* Load Code Generator File */
 if (isset($_POST['Reset_Password'])) {
 
     $admin_email = $_POST['admin_email'];
-    $query = mysqli_query($mysqli, "SELECT * FROM adamin WHERE admin_email = '" . $admin_email . "' ");
+    $query = mysqli_query($mysqli, "SELECT * FROM admin WHERE admin_email = '" . $admin_email . "' ");
     $num_rows = mysqli_num_rows($query);
     if ($num_rows > 0) {
         $query = "UPDATE admin SET  admin_password =? WHERE  admin_email =? ";
@@ -75,12 +75,12 @@ if (isset($_POST['Reset_Password'])) {
         $stmt->execute();
         if ($stmt) {
             $_SESSION['admin_email'] = $admin_email;
-            $success = "Password Reset" && header("refresh:1; url=confirm_password");
+            $success = " Password Reset" && header("refresh:1; url=confirm_password");
         } else {
-            $err = "Password reset failed";
+            $err = " Password reset failed";
         }
     } else {
-        $err = "User Account Does Not Exist";
+        $err = "  User Account Does Not Exist";
     }
 }
 
@@ -107,13 +107,12 @@ require_once('partials/head.php');
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-6">
                         </div>
                         <!-- /.col -->
                         <div class="col-6">
-                            <button type="submit" name="reset_password" class="btn btn-primary btn-block">Reset Password</button>
+                            <button type="submit" name="Reset_Password" class="btn btn-primary btn-block">Reset Password</button>
                         </div>
                         <!-- /.col -->
                     </div>
