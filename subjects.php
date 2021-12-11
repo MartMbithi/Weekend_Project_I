@@ -98,6 +98,20 @@ if (isset($_POST['update_subject'])) {
 }
 
 /* Delete Subject */
+if (isset($_POST['delete'])) {
+    $subject_id = $_POST['subject_id'];
+
+    /* Log This Transaction */
+    $sql = "DELETE FROM subject WHERE subject_id = ?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('s', $subject_id);
+    $prepare->execute();
+    if ($prepare) {
+        $info = "Subject Deleted";
+    } else {
+        $err = "Failed!, Please Try Again Later";
+    }
+}
 
 require_once('partials/head.php');
 ?>
