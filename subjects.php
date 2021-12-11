@@ -80,7 +80,25 @@ if (isset($_POST['add_subject'])) {
     }
 }
 /* Update Subject */
+if (isset($_POST['update_subject'])) {
+    $subject_id = $_POST['subject_id'];
+    $subject_code = $_POST['subject_code'];
+    $subject_name  = $_POST['subject_name'];
+
+    /* Log This Transaction */
+    $sql = "UPDATE subejects SET subject_name =?, subject_code =? WHERE subject_id =?";
+    $prepare  = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('sss', $subject_name, $subject_code, $subject_id);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "$subject_name, Updated";
+    } else {
+        $err = "Failed!, Please Try Again Later";
+    }
+}
+
 /* Delete Subject */
+
 require_once('partials/head.php');
 ?>
 
