@@ -63,7 +63,7 @@
 
 
 /* Register Check Login Functions Here */
-function staff_checklogin()
+function checklogin()
 {
 	if ((strlen($_SESSION['admin_id']) == 0) && strlen($_SESSION['admin_email']) == 0) {
 		$host = $_SERVER['HTTP_HOST'];
