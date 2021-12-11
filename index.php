@@ -60,7 +60,26 @@
  */
 session_start();
 require_once('config/config.php');
+
 /* Log User In */
+if (isset($_POST['login'])) {
+    $admin_email = $_POST['admin_email'];
+    $admin_password = sha1(md5($_POST['admin_password']));
+
+    $stmt = $mysqli->prepare("SELECT admin_email, admin_password, admin_id FROM admin WHERE admin_email=? AND admin_password=? ");
+    $stmt->bind_param('ss', $admin_email, $admin_password);
+    $stmt->execute();
+    $stmt->bind_result($admin_email, $admin_password, $admin_id);
+    $rs = $stmt->fetch();
+
+    if ($rs) {
+        $_SESSION['admin_id'] = $admin_id;
+        $_SESSION['admin_email'] = $admin_email;
+        header("location:dashboard");
+    } else {
+        $err = "Access Denied Please Check Your Email Or Password";
+    }
+}
 require_once('partials/head.php');
 
 ?>
