@@ -9,38 +9,45 @@
 <!-- Init Sweet Alerts -->
 <?php if (isset($success)) { ?>
     <script>
-        Swal.fire({
+        const Toast = Swal.mixin({
+            toast: true,
             position: 'top-end',
-            icon: 'success',
-            title: '<?php echo $success; ?>',
             showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-
-<?php } ?>
-
-<?php if (isset($err)) { ?>
-    <script>
-        Swal.fire({
-            position: 'top-end',
-            icon: 'errror',
+            timer: 3000
+        });
+        Toast.fire({
+            type: 'error',
             title: '<?php echo $err; ?>',
-            showConfirmButton: false,
-            timer: 1500
         })
     </script>
 
-<?php } ?>
-
-<?php if (isset($info)) { ?>
+<?php }
+if (isset($err)) { ?>
     <script>
-        Swal.fire({
+        const Toast = Swal.mixin({
+            toast: true,
             position: 'top-end',
-            icon: 'info',
-            title: '<?php echo $info; ?>',
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000
+        });
+        Toast.fire({
+            type: 'error',
+            title: '<?php echo $err; ?>',
+        })
+    </script>
+
+<?php }
+if (isset($info)) { ?>
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        Toast.fire({
+            type: 'error',
+            title: '<?php echo $err; ?>',
         })
     </script>
 
