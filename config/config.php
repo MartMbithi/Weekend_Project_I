@@ -1,10 +1,15 @@
 <?php
 /*
- * Created on Wed Oct 13 2021
+ * Created on Sat Dec 11 2021
+ *
+ *  Devlan - devlan.co.ke 
+ *
+ * hello@devlan.info
+ *
  *
  * The Devlan End User License Agreement
- * Copyright (c) 2021 DevLan
  *
+ * Copyright (c) 2021 Devlan
  *
  * 1. GRANT OF LICENSE
  * Devlan hereby grants to you (an individual) the revocable, personal, non-exclusive, and nontransferable right to
@@ -32,8 +37,8 @@
  * Upon such termination, you agree to destroy the Software, together with all copies thereof.
  *
  * 5. NO OTHER WARRANTIES. 
- * DEVLAN  DOES NOT WARRANT THAT THE SOFTWARE IS ERROR FREE. 
- * DEVLAN SOFTWARE DISCLAIMS ALL OTHER WARRANTIES WITH RESPECT TO THE SOFTWARE, 
+ * Devlan  DOES NOT WARRANT THAT THE SOFTWARE IS ERROR FREE. 
+ * Devlan SOFTWARE DISCLAIMS ALL OTHER WARRANTIES WITH RESPECT TO THE SOFTWARE, 
  * EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. 
  * SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES OR LIMITATIONS
@@ -68,7 +73,7 @@ $dbpass = "";
 
 /* Database Name */
 
-$db = "barbershop_reservation_application";
+$db = "sms";
 
 /* Pass Connection Variables To Mysqli Function */
 $mysqli = new mysqli($host, $dbuser, $dbpass, $db);
