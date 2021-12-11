@@ -59,7 +59,7 @@ if (isset($info)) { ?>
 <!-- Init Data Tables -->
 <script>
     $(function() {
-        $("#data_table").DataTable();
+        $(".table").DataTable();
 
     });
 </script>

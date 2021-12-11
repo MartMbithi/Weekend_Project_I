@@ -62,17 +62,36 @@ session_start();
 require_once('config/config.php');/* Load Config File */
 require_once('config/checklogin.php');/* Load Checklogin */
 checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking */
-require_once('../partials/head.php');
+
+/* Add Subject */
+if (isset($_POST['add_subject'])) {
+    $subject_code = $_POST['subject_code'];
+    $subject_name = $_POST['subject_name'];
+
+    /* Log This Transaction */
+    $sql = "INSERT INTO subject (subject_code, subject_name) VALUES(?,?)";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('ss', $subject_code, $subject_name);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "$subject_name, Added";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
+/* Update Subject */
+/* Delete Subject */
+require_once('partials/head.php');
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <?php require_once('../partials/navbar.php'); ?>
+        <?php require_once('partials/navbar.php'); ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php require_once('../partials/aside.php'); ?>
+        <?php require_once('partials/aside.php'); ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -135,7 +154,7 @@ require_once('../partials/head.php');
                     <!-- End Modal -->
                     <div class="row">
                         <div class="col-12">
-                            <table class="table table-bordered table-hover">
+                            <table id="" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Subject Code</th>
@@ -234,9 +253,9 @@ require_once('../partials/head.php');
             </section>
         </div>
         <!-- Main Footer -->
-        <?php require_once('../partials/footer.php'); ?>
+        <?php require_once('partials/footer.php'); ?>
     </div>
-    <?php require_once('../partials/scripts.php'); ?>
+    <?php require_once('partials/scripts.php'); ?>
 </body>
 
 </html>
