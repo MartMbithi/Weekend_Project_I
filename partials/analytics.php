@@ -63,7 +63,7 @@
 /* Register Anaalytics Logics Here */
 
 /* Teachers */
-$query = "SELECT COUNT(*) FROM `teachers` ";
+$query = "SELECT COUNT(*) FROM `teacher` ";
 $stmt = $mysqli->prepare($query);
 $stmt->execute();
 $stmt->bind_result($teachers);
