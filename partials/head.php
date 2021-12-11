@@ -23,5 +23,5 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Data Tables -->
-    
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 </head>
