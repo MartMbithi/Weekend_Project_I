@@ -63,59 +63,30 @@ require_once('config/config.php');/* Load Config File */
 require_once('config/checklogin.php');/* Load Checklogin */
 checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking */
 
-/* Add Teacher */
-if (isset($_POST['add_teacher'])) {
-    $t_name = $_POST['t_name'];
-    $t_email = $_POST['t_email'];
-    $t_phone  = $_POST['t_phone'];
-    $t_subject_id = $_POST['t_subject_id'];
-
-    /* Log Transcation */
-    $sql = "INSERT INTO teacher (t_name, t_email, t_phone, t_subject_id) VALUES(?,?,?,?)";
-    $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_subject_id);
-    $prepare->execute();
-    if ($prepare) {
-        $success = "$t_name, Account Created";
-    } else {
-        $err = "Failed!, Please Try Again";
-    }
-}
-
-/* Update Teacher */
-if (isset($_POST['update_teacher'])) {
-    $t_name = $_POST['t_name'];
-    $t_email = $_POST['t_email'];
-    $t_phone  = $_POST['t_phone'];
-    $t_id = $_POST['t_id'];
-
-    /* Log Transcation */
-    $sql = "UPDATE  teacher SET t_name =?, t_email =? , t_phone =? WHERE t_id =?";
-    $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_id);
-    $prepare->execute();
-    if ($prepare) {
-        $success = "$t_name, Account Updated";
-    } else {
-        $err = "Failed!, Please Try Again";
-    }
-}
-
-/* Delete Teacher */
-if (isset($_POST['delete'])) {
-    $t_id = $_POST['t_id'];
+/* Add Marks */
+if (isset($$_POST['add_marks'])) {
+    $marks_subject_id = $_POST['marks_subject_id'];
+    $marks_student_id = $_POST['marks_student_id'];
+    $marks_aggregate = $_POST['marks_aggregate'];
 
     /* Log Transaction */
-    $sql = "DELETE FROM teacher WHERE t_id =?";
+    $sql = "INSERT INTO marks (marks_subject_id, marks_student_id, marks_aggregate) VALUES(?,?,?)";
     $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('s', $t_id);
+    $bind = $prepare->bind_param(
+        'sss',
+        $marks_subject_id,
+        $marks_student_id,
+        $marks_aggregate
+    );
     $prepare->execute();
     if ($prepare) {
-        $success = "Teacher Account Deleted";
+        $success = "Marks Added";
     } else {
         $err = "Failed!, Please Try Again";
     }
 }
+/* Update Marks */
+/* Delete Marks */
 
 require_once('partials/head.php');
 ?>
