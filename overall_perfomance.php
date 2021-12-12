@@ -99,7 +99,7 @@ require_once('partials/head.php');
                     <hr>
                     <div class="row">
                         <div class="col-12">
-                            <table id="" class="table table-bordered table-hover">
+                            <table id="export-data-table" class="table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Student Details</th>
