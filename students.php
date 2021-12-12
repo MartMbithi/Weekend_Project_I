@@ -251,13 +251,13 @@ require_once('partials/head.php');
                                                                 <form method="post" enctype="multipart/form-data" role="form">
                                                                     <div class="card-body">
                                                                         <div class="row">
-                                                                            <div class="form-group col-md-12">
+                                                                            <div class="form-group col-md-6">
                                                                                 <label for="">Full Name</label>
                                                                                 <input type="text" required value="<?php echo $std->student_name; ?>" name="student_name" class="form-control">
-                                                                                <input type="hidden" value="<?php echo $std->student_id; ?>" required name="student_name" class="form-control">
+                                                                                <input type="hidden" value="<?php echo $std->student_id; ?>" required name="student_id" class="form-control">
 
                                                                             </div>
-                                                                            <div class="form-group col-md-12">
+                                                                            <div class="form-group col-md-6">
                                                                                 <label for="">Admission Number</label>
                                                                                 <input type="text" required name="student_admno" value="<?php echo $std->student_admno; ?>" class="form-control">
                                                                             </div>
