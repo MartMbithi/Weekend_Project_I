@@ -236,7 +236,7 @@ require_once('partials/head.php');
                                     <?php
                                     $ret = "SELECT * FROM marks m
                                     INNER JOIN student s ON m.marks_student_id = s.student_id
-                                    INNER JOIN subject sb ON m.marks_subject_id = s.subject_id";
+                                    INNER JOIN subject sb ON m.marks_subject_id = sb.subject_id";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
@@ -270,7 +270,20 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Marks Aggregate</label>
+                                                                                <input type="hidden" value="<?php echo $marks->marks_id; ?>" required name="marks_id" class="form-control">
+                                                                                <input type="number" value="<?php echo $marks->marks_aggregate; ?>" required name="marks_aggregate" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_marks" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -293,7 +306,7 @@ require_once('partials/head.php');
                                                                     <br>
                                                                     <p>Heads Up, You are about to delete <?php echo $marks->student_name; ?>. This action is irrevisble.</p>
                                                                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                    <input type="hidden" name="marks_id" value="<?php echo $teacher->marks_id; ?>">
+                                                                    <input type="hidden" name="marks_id" value="<?php echo $marks->marks_id; ?>">
                                                                     <input type="submit" class="text-center btn btn-danger" value="Delete" name="delete">
                                                                 </form>
                                                             </div>
