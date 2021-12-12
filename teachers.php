@@ -82,6 +82,27 @@ if (isset($_POST['add_teacher'])) {
     }
 }
 
+/* Update Teacher */
+if (isset($_POST['add_teacher'])) {
+    $t_name = $_POST['t_name'];
+    $t_email = $_POST['t_email'];
+    $t_phone  = $_POST['t_phone'];
+    $t_id = $_POST['t_id'];
+
+    /* Log Transcation */
+    $sql = "UPDATE  teacher SET t_name =?, t_email =? , t_phone =? WHERE t_id =?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_id);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "$t_name, Account Updated";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
+
+/* Delete Teacher */
+
 
 require_once('partials/head.php');
 ?>
