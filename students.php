@@ -63,60 +63,25 @@ require_once('config/config.php');/* Load Config File */
 require_once('config/checklogin.php');/* Load Checklogin */
 checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking */
 
-/* Add Teacher */
-if (isset($_POST['add_teacher'])) {
-    $t_name = $_POST['t_name'];
-    $t_email = $_POST['t_email'];
-    $t_phone  = $_POST['t_phone'];
-    $t_subject_id = $_POST['t_subject_id'];
+/* Add Student */
+if (isset($_POST['add_student'])) {
+    $student_admno = $_POST['stuent_admno'];
+    $student_class_id = $_POST['student_class_id'];
+    $student_name = $_POST['student_name'];
 
-    /* Log Transcation */
-    $sql = "INSERT INTO teacher (t_name, t_email, t_phone, t_subject_id) VALUES(?,?,?,?)";
+    /* Persist */
+    $sql = "INSERT INTO student (student_admno, student_class_id, student_name) VALUES(?,?,?)";
     $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_subject_id);
+    $bind = $prepare->bind_param('sss', $student_admno, $student_class_id, $student_name);
     $prepare->execute();
     if ($prepare) {
-        $success = "$t_name, Account Created";
+        $success = "$student_admno, $student_name, Added";
     } else {
-        $err = "Failed!, Please Try Again";
+        $err = "Failed!, Please Try Again Later";
     }
 }
-
-/* Update Teacher */
-if (isset($_POST['update_teacher'])) {
-    $t_name = $_POST['t_name'];
-    $t_email = $_POST['t_email'];
-    $t_phone  = $_POST['t_phone'];
-    $t_id = $_POST['t_id'];
-
-    /* Log Transcation */
-    $sql = "UPDATE  teacher SET t_name =?, t_email =? , t_phone =? WHERE t_id =?";
-    $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_id);
-    $prepare->execute();
-    if ($prepare) {
-        $success = "$t_name, Account Updated";
-    } else {
-        $err = "Failed!, Please Try Again";
-    }
-}
-
-/* Delete Teacher */
-if (isset($_POST['delete'])) {
-    $t_id = $_POST['t_id'];
-
-    /* Log Transaction */
-    $sql = "DELETE FROM teacher WHERE t_id =?";
-    $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('s', $t_id);
-    $prepare->execute();
-    if ($prepare) {
-        $success = "Teacher Account Deleted";
-    } else {
-        $err = "Failed!, Please Try Again";
-    }
-}
-
+/* Update Student */
+/* Delete Student */
 require_once('partials/head.php');
 ?>
 
