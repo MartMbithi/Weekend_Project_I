@@ -86,6 +86,27 @@ if (isset($$_POST['add_marks'])) {
     }
 }
 /* Update Marks */
+if (isset($$_POST['update_marks'])) {
+    $marks_aggregate = $_POST['marks_aggregate'];
+    $marks_id = $_POST['marks_id'];
+
+    /* Log Transaction */
+    $sql = "UPDATE marks SET marks_aggregate = ? WHERE marks_id =? ";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param(
+        'ss',
+        $marks_aggregate,
+        $marks_id
+    );
+    $prepare->execute();
+    if ($prepare) {
+        $success = "Marks Updated";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
+
+
 /* Delete Marks */
 
 require_once('partials/head.php');
