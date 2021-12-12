@@ -102,7 +102,20 @@ if (isset($_POST['add_teacher'])) {
 }
 
 /* Delete Teacher */
+if (isset($_POST['delete'])) {
+    $t_id = $_POST['t_id'];
 
+    /* Log Transaction */
+    $sql = "DELETE FROM teacher WHERE t_id =?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('s', $t_id);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "Teacher Account Deleted";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
 
 require_once('partials/head.php');
 ?>
