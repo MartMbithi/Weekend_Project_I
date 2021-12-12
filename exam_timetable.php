@@ -119,7 +119,25 @@ if (isset($_POST['update_tt'])) {
         $err = "Failed!, Please Try Again";
     }
 }
+
 /* Delete Unit From Time Table */
+if (isset($_POST['delete'])) {
+    $tt_id = $_POST['tt_id'];
+
+    /* Log Transaction */
+    $sql = "DELETE FROM  exam_timetable  WHERE tt_id = ?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param(
+        's',
+        $tt_id
+    );
+    $prepare->execute();
+    if ($prepare) {
+        $success = "Exam Time Table Deleted";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
 require_once('partials/head.php');
 ?>
 
