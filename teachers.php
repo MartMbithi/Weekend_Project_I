@@ -63,56 +63,25 @@ require_once('config/config.php');/* Load Config File */
 require_once('config/checklogin.php');/* Load Checklogin */
 checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking */
 
-/* Add Class */
-if (isset($_POST['add_class'])) {
-    $class_code = $_POST['class_code'];
-    $class_name = $_POST['class_name'];
+/* Add Teacher */
+if (isset($_POST['add_teacher'])) {
+    $t_name = $_POST['t_name'];
+    $t_email = $_POST['t_email'];
+    $t_phone  = $_POST['t_phone'];
+    $t_subject_id = $_POST['t_subject_id'];
 
-    /* Log This Transaction */
-    $sql = "INSERT INTO class (class_code, class_name) VALUES(?,?)";
+    /* Log Transcation */
+    $sql = "INSERT INTO teacher (t_name, t_email, t_phone, t_subject_id) VALUES(?,?,?,?)";
     $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('ss', $class_code, $class_name);
+    $bind = $prepare->bind_param('ssss', $t_name, $t_email, $t_phone, $t_subject_id);
     $prepare->execute();
     if ($prepare) {
-        $success = "$class_name, Added";
+        $success = "$t_name, Account Created";
     } else {
         $err = "Failed!, Please Try Again";
     }
 }
 
-/* Update Class */
-if (isset($_POST['update_class'])) {
-    $class_id = $_POST['class_id'];
-    $class_code = $_POST['class_code'];
-    $class_name  = $_POST['class_name'];
-
-    /* Log This Transaction */
-    $sql = "UPDATE class SET class_name =?, class_code =? WHERE class_id =?";
-    $prepare  = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('sss', $class_name, $class_code, $class_id);
-    $prepare->execute();
-    if ($prepare) {
-        $success = "$class_name, Updated";
-    } else {
-        $err = "Failed!, Please Try Again Later";
-    }
-}
-
-/* Delete Class */
-if (isset($_POST['delete'])) {
-    $class_id = $_POST['class_id'];
-
-    /* Log This Transaction */
-    $sql = "DELETE FROM class WHERE class_id = ?";
-    $prepare = $mysqli->prepare($sql);
-    $bind = $prepare->bind_param('s', $class_id);
-    $prepare->execute();
-    if ($prepare) {
-        $info = "Class Deleted";
-    } else {
-        $err = "Failed!, Please Try Again Later";
-    }
-}
 
 require_once('partials/head.php');
 ?>
