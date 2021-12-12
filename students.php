@@ -80,8 +80,27 @@ if (isset($_POST['add_student'])) {
         $err = "Failed!, Please Try Again Later";
     }
 }
+
 /* Update Student */
+if (isset($_POST['update_student'])) {
+    $student_admno = $_POST['stuent_admno'];
+    $student_id = $_POST['student_id'];
+    $student_name = $_POST['student_name'];
+
+    /* Persist */
+    $sql = "UPDATE student  SET student_admno =?, student_name =? WHERE student_id =?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('sss', $student_admno, $student_name, $student_id);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "$student_admno, $student_name, Updated";
+    } else {
+        $err = "Failed!, Please Try Again Later";
+    }
+}
+
 /* Delete Student */
+
 require_once('partials/head.php');
 ?>
 
