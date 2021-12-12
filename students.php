@@ -248,7 +248,25 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Full Name</label>
+                                                                                <input type="text" required value="<?php echo $std->student_name; ?>" name="student_name" class="form-control">
+                                                                                <input type="hidden" value="<?php echo $std->student_id; ?>" required name="student_name" class="form-control">
 
+                                                                            </div>
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Admission Number</label>
+                                                                                <input type="text" required name="student_admno" value="<?php echo $std->student_admno; ?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_student" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
