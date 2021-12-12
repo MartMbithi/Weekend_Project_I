@@ -99,17 +99,15 @@ if (isset($_POST['update_tt'])) {
     $tt_exam_date = $_POST['tt_exam_date'];
     $tt_exam_start = $_POST['tt_exam_start'];
     $tt_exam_end = $_POST['tt_exam_end'];
-    $tt_exam_invigilator  = $_POST['tt_exam_invigilator'];
 
     /* Log Transaction */
-    $sql = "UPDATE  exam_timetable SET tt_exam_date, tt_exam_start,  tt_exam_end, tt_exam_invigilator, WHERE tt_id = ?";
+    $sql = "UPDATE  exam_timetable SET tt_exam_date =?, tt_exam_start =?,  tt_exam_end =? WHERE tt_id = ?";
     $prepare = $mysqli->prepare($sql);
     $bind = $prepare->bind_param(
-        'sssss',
+        'ssss',
         $tt_exam_date,
         $tt_exam_start,
         $tt_exam_end,
-        $tt_exam_invigilator,
         $tt_id
     );
     $prepare->execute();
@@ -263,7 +261,7 @@ require_once('partials/head.php');
                                         <th>Subject Details</th>
                                         <th>Class Details</th>
                                         <th>Invigilator </th>
-                                        <th>Exam Dates</th>
+                                        <th>Exam Dates & Time</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -293,7 +291,7 @@ require_once('partials/head.php');
                                             <td>
                                                 Date: <?php echo date('d M Y', strtotime($tt->tt_exam_date)); ?><br>
                                                 Start Time : <?php echo $tt->tt_exam_start; ?><br>
-                                                End Time : <?php echo $tt->tt_exam_start; ?>
+                                                End Time : <?php echo $tt->tt_exam_end; ?>
                                             </td>
                                             <td>
                                                 <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $tt->tt_id; ?>">
@@ -315,7 +313,28 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Exam Date</label>
+                                                                                <input type="hidden" required name="tt_id" value="<?php echo $tt->tt_id; ?>" class="form-control">
+                                                                                <input type="date" required name="tt_exam_date" value="<?php echo $tt->tt_exam_date; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">Start Time</label>
+                                                                                <input type="time" required name="tt_exam_start" value="<?php echo $tt->tt_exam_start; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="">End Time</label>
+                                                                                <input type="time" required name="tt_exam_end" value="<?php echo $tt->tt_exam_end; ?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_tt" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
