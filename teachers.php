@@ -256,7 +256,29 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <form method="post" enctype="multipart/form-data" role="form">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label for="">Full Name</label>
+                                                                                <input type="text" required name="t_name" value="<?php echo $teacher->t_name; ?>" class="form-control">
+                                                                                <input type="hidden" required name="t_id" value="<?php echo $teacher->t_id; ?>" class="form-control">
 
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Email</label>
+                                                                                <input type="email" required name="t_email" value="<?php echo $teacher->t_email; ?>" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label for="">Phone Number</label>
+                                                                                <input type="text" required name="t_phone" value="<?php echo $teacher->t_phone; ?>" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <button type="submit" name="update_teacher" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
