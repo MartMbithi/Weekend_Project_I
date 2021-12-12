@@ -260,41 +260,52 @@ require_once('partials/head.php');
                             <table id="" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Admission Number </th>
-                                        <th>Class Enrolled</th>
+                                        <th>Subject Details</th>
+                                        <th>Class Details</th>
+                                        <th>Invigilator </th>
+                                        <th>Exam Dates</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM student s 
-                                    INNER JOIN class c
-                                     ON s.student_class_id = c.class_id";
+                                    $ret = "SELECT * FROM exam_timetable et
+                                    INNER JOIN subject s ON s.subject_id = et.tt_subject_id
+                                    INNER JOIN teacher t ON t.t_id = et.tt_exam_invigilator
+                                    INNER JOIN class c ON c.class_id = et.tt_exam_class_id";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($std = $res->fetch_object()) {
+                                    while ($tt = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $std->student_name; ?></td>
                                             <td>
-                                                <?php echo $std->student_admno; ?>
+                                                Code: <?php echo $tt->subject_code; ?><br>
+                                                Name: <?php echo $tt->subject_name; ?>
                                             </td>
                                             <td>
-                                                Code : <?php echo $std->class_code . '<br> Name : ' . $std->class_name; ?>
+                                                Code: <?php echo $tt->class_code; ?><br>
+                                                Name: <?php echo $tt->class_name; ?>
                                             </td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $std->student_id; ?>">
+                                                <?php echo $tt->t_name; ?>
+                                            </td>
+                                            <td>
+                                                Date: <?php echo date('d M Y', strtotime($tt->tt_exam_date)); ?><br>
+                                                Start Time : <?php echo $tt->tt_exam_start; ?><br>
+                                                End Time : <?php echo $tt->tt_exam_start; ?>
+                                            </td>
+                                            <td>
+                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $tt->tt_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $std->student_id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $tt->tt_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
-                                                <div class="modal fade" id="edit-<?php echo $std->student_id; ?>">
+                                                <div class="modal fade" id="edit-<?php echo $tt->tt_id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -304,25 +315,7 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form method="post" enctype="multipart/form-data" role="form">
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Full Name</label>
-                                                                                <input type="text" required value="<?php echo $std->student_name; ?>" name="student_name" class="form-control">
-                                                                                <input type="hidden" value="<?php echo $std->student_id; ?>" required name="student_id" class="form-control">
 
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Admission Number</label>
-                                                                                <input type="text" required name="student_admno" value="<?php echo $std->student_admno; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="text-right">
-                                                                        <button type="submit" name="update_student" class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -330,7 +323,7 @@ require_once('partials/head.php');
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $std->student_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $tt->tt_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -341,11 +334,11 @@ require_once('partials/head.php');
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
                                                                 <form method="POST">
-                                                                    <h4>Delete <?php echo $std->student_name; ?> ?</h4>
+                                                                    <h4>Delete Subject From Time Table ?</h4>
                                                                     <br>
-                                                                    <p>Heads Up, You are about to delete <?php echo $std->student_name; ?>. This action is irrevisble.</p>
+                                                                    <p>Heads Up, You are about to delete <?php echo $tt->subject_name; ?> from exam time table. This action is irrevisble.</p>
                                                                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                    <input type="hidden" name="student_id" value="<?php echo $std->student_id; ?>">
+                                                                    <input type="hidden" name="tt_id" value="<?php echo $tt->tt_id; ?>">
                                                                     <input type="submit" class="text-center btn btn-danger" value="Delete" name="delete">
                                                                 </form>
                                                             </div>
