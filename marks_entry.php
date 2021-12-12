@@ -226,42 +226,41 @@ require_once('partials/head.php');
                             <table id="" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Contacts </th>
-                                        <th>Subject Teaching</th>
+                                        <th>Student Details</th>
+                                        <th>Subject Details </th>
+                                        <th>Marks Attained</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $ret = "SELECT * FROM teacher t 
-                                    INNER JOIN subject s
-                                     ON t.t_subject_id = s.subject_id ";
+                                    $ret = "SELECT * FROM marks m
+                                    INNER JOIN student s ON m.marks_student_id = s.student_id
+                                    INNER JOIN subject sb ON m.marks_subject_id = s.subject_id";
                                     $stmt = $mysqli->prepare($ret);
                                     $stmt->execute(); //ok
                                     $res = $stmt->get_result();
-                                    while ($teacher = $res->fetch_object()) {
+                                    while ($marks = $res->fetch_object()) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $teacher->t_name; ?></td>
+                                            <td><?php echo $marks->student_admno . ' ' . $marks->student_name; ?></td>
                                             <td>
-                                                Phone : <?php echo $teacher->t_phone; ?><br>
-                                                Email : <?php echo $teacher->t_email; ?>
+                                                <?php echo $marks->subject_code . ' ' . $marks->subject_name; ?></td>
                                             </td>
                                             <td>
-                                                Code : <?php echo $teacher->subject_code . '<br> Name : ' . $teacher->subject_name; ?>
+                                                <?php echo $marks->marks_aggregate; ?>
                                             </td>
                                             <td>
-                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $teacher->t_id; ?>">
+                                                <a class="badge badge-primary" data-toggle="modal" href="#edit-<?php echo $marks->marks_id; ?>">
                                                     <i class="fas fa-edit"></i>
                                                     Update
                                                 </a>
-                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $teacher->t_id; ?>">
+                                                <a class="badge badge-danger" data-toggle="modal" href="#delete-<?php echo $marks->marks_id; ?>">
                                                     <i class="fas fa-trash"></i>
                                                     Delete
                                                 </a>
                                                 <!-- Update Modal -->
-                                                <div class="modal fade" id="edit-<?php echo $teacher->t_id; ?>">
+                                                <div class="modal fade" id="edit-<?php echo $marks->marks_id; ?>">
                                                     <div class="modal-dialog  modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -271,29 +270,7 @@ require_once('partials/head.php');
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form method="post" enctype="multipart/form-data" role="form">
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="form-group col-md-12">
-                                                                                <label for="">Full Name</label>
-                                                                                <input type="text" required name="t_name" value="<?php echo $teacher->t_name; ?>" class="form-control">
-                                                                                <input type="hidden" required name="t_id" value="<?php echo $teacher->t_id; ?>" class="form-control">
 
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Email</label>
-                                                                                <input type="email" required name="t_email" value="<?php echo $teacher->t_email; ?>" class="form-control">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="">Phone Number</label>
-                                                                                <input type="text" required name="t_phone" value="<?php echo $teacher->t_phone; ?>" class="form-control">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="text-right">
-                                                                        <button type="submit" name="update_teacher" class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -301,7 +278,7 @@ require_once('partials/head.php');
                                                 <!-- End Modal -->
 
                                                 <!-- Delete Modal -->
-                                                <div class="modal fade" id="delete-<?php echo $teacher->t_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="delete-<?php echo $marks->marks_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -312,11 +289,11 @@ require_once('partials/head.php');
                                                             </div>
                                                             <div class="modal-body text-center text-danger">
                                                                 <form method="POST">
-                                                                    <h4>Delete <?php echo $teacher->t_name; ?> ?</h4>
+                                                                    <h4>Delete <?php echo $marks->student_name; ?> Marks ?</h4>
                                                                     <br>
-                                                                    <p>Heads Up, You are about to delete <?php echo $teacher->t_name; ?>. This action is irrevisble.</p>
+                                                                    <p>Heads Up, You are about to delete <?php echo $marks->student_name; ?>. This action is irrevisble.</p>
                                                                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                                                                    <input type="hidden" name="t_id" value="<?php echo $teacher->t_id; ?>">
+                                                                    <input type="hidden" name="marks_id" value="<?php echo $teacher->marks_id; ?>">
                                                                     <input type="submit" class="text-center btn btn-danger" value="Delete" name="delete">
                                                                 </form>
                                                             </div>
