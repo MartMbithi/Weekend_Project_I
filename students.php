@@ -100,7 +100,20 @@ if (isset($_POST['update_student'])) {
 }
 
 /* Delete Student */
+if (isset($_POST['delete'])) {
+    $student_id = $_POST['student_id'];
 
+    /* Persist */
+    $sql = "DELETE FROM student WHERE  student_id =?";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param('s', $student_id);
+    $prepare->execute();
+    if ($prepare) {
+        $success = "Student Detaails Deleted";
+    } else {
+        $err = "Failed!, Please Try Again Later";
+    }
+}
 require_once('partials/head.php');
 ?>
 
