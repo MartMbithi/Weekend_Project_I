@@ -108,6 +108,23 @@ if (isset($$_POST['update_marks'])) {
 
 
 /* Delete Marks */
+if (isset($$_POST['delete'])) {
+    $marks_id = $_POST['marks_id'];
+
+    /* Log Transaction */
+    $sql = "DELETE FROM  marks WHERE  marks_id =? ";
+    $prepare = $mysqli->prepare($sql);
+    $bind = $prepare->bind_param(
+        's',
+        $marks_id
+    );
+    $prepare->execute();
+    if ($prepare) {
+        $success = "Marks Deleted";
+    } else {
+        $err = "Failed!, Please Try Again";
+    }
+}
 
 require_once('partials/head.php');
 ?>
