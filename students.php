@@ -65,7 +65,7 @@ checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking *
 
 /* Add Student */
 if (isset($_POST['add_student'])) {
-    $student_admno = $_POST['stuent_admno'];
+    $student_admno = $_POST['student_admno'];
     $student_class_id = $_POST['student_class_id'];
     $student_name = $_POST['student_name'];
 
@@ -83,7 +83,7 @@ if (isset($_POST['add_student'])) {
 
 /* Update Student */
 if (isset($_POST['update_student'])) {
-    $student_admno = $_POST['stuent_admno'];
+    $student_admno = $_POST['student_admno'];
     $student_id = $_POST['student_id'];
     $student_name = $_POST['student_name'];
 
@@ -172,7 +172,7 @@ require_once('partials/head.php');
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Admission Number</label>
-                                                    <input type="email" required name="student_admno" class="form-control">
+                                                    <input type="text" required name="student_admno" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="">Class Enrolled</label>
