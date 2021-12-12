@@ -133,13 +133,13 @@ require_once('partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">Teachers</h1>
+                            <h1 class="m-0 text-bold">Students</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Teachers</li>
+                                <li class="breadcrumb-item active">Students</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -149,7 +149,7 @@ require_once('partials/head.php');
             <section class="content">
                 <div class="container-fluid">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Teacher</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Student</button>
                     </div>
                     <hr>
                     <!-- Add Modal -->
@@ -166,36 +166,32 @@ require_once('partials/head.php');
                                     <form method="post" enctype="multipart/form-data" role="form">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-12">
                                                     <label for="">Full Name</label>
-                                                    <input type="text" required name="t_name" class="form-control">
+                                                    <input type="text" required name="student_name" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="">Email</label>
-                                                    <input type="email" required name="t_email" class="form-control">
+                                                    <label for="">Admission Number</label>
+                                                    <input type="email" required name="student_admno" class="form-control">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="">Phone Number</label>
-                                                    <input type="text" required name="t_phone" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Subject Teaching</label>
-                                                    <select class="form-control" name="t_subject_id">
+                                                    <label for="">Class Enrolled</label>
+                                                    <select class="form-control" name="student_class_id">
                                                         <?php
-                                                        $ret = "SELECT * FROM subject ";
+                                                        $ret = "SELECT * FROM class ";
                                                         $stmt = $mysqli->prepare($ret);
                                                         $stmt->execute(); //ok
                                                         $res = $stmt->get_result();
-                                                        while ($subject = $res->fetch_object()) {
+                                                        while ($class = $res->fetch_object()) {
                                                         ?>
-                                                            <option value="<?php echo $subject->subject_id; ?>"><?php echo $subject->subject_code . ' - ' . $subject->subject_name; ?></option>
+                                                            <option value="<?php echo $class->class_id; ?>"><?php echo $class->class_code . ' - ' . $class->class_name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_teacher" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_student" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
