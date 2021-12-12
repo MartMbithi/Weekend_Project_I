@@ -64,7 +64,7 @@ require_once('config/checklogin.php');/* Load Checklogin */
 checklogin();/* Invoke Check Login, Prevent Watery Log Ins & Session Hijacking */
 
 /* Add Marks */
-if (isset($$_POST['add_marks'])) {
+if (isset($_POST['add_marks'])) {
     $marks_subject_id = $_POST['marks_subject_id'];
     $marks_student_id = $_POST['marks_student_id'];
     $marks_aggregate = $_POST['marks_aggregate'];
@@ -86,7 +86,7 @@ if (isset($$_POST['add_marks'])) {
     }
 }
 /* Update Marks */
-if (isset($$_POST['update_marks'])) {
+if (isset($_POST['update_marks'])) {
     $marks_aggregate = $_POST['marks_aggregate'];
     $marks_id = $_POST['marks_id'];
 
@@ -108,7 +108,7 @@ if (isset($$_POST['update_marks'])) {
 
 
 /* Delete Marks */
-if (isset($$_POST['delete'])) {
+if (isset($_POST['delete'])) {
     $marks_id = $_POST['marks_id'];
 
     /* Log Transaction */
@@ -145,13 +145,13 @@ require_once('partials/head.php');
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-bold">Teachers</h1>
+                            <h1 class="m-0 text-bold">Marks</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Teachers</li>
+                                <li class="breadcrumb-item active">Marks</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -161,7 +161,7 @@ require_once('partials/head.php');
             <section class="content">
                 <div class="container-fluid">
                     <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Teacher</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">Add Marks</button>
                     </div>
                     <hr>
                     <!-- Add Modal -->
@@ -179,20 +179,8 @@ require_once('partials/head.php');
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label for="">Full Name</label>
-                                                    <input type="text" required name="t_name" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Email</label>
-                                                    <input type="email" required name="t_email" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Phone Number</label>
-                                                    <input type="text" required name="t_phone" class="form-control">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Subject Teaching</label>
-                                                    <select class="form-control" name="t_subject_id">
+                                                    <label for="">Subject</label>
+                                                    <select class="form-control" name="marks_subject_id">
                                                         <?php
                                                         $ret = "SELECT * FROM subject ";
                                                         $stmt = $mysqli->prepare($ret);
@@ -204,10 +192,28 @@ require_once('partials/head.php');
                                                         <?php } ?>
                                                     </select>
                                                 </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Student</label>
+                                                    <select class="form-control" name="marks_student_id">
+                                                        <?php
+                                                        $ret = "SELECT * FROM student ";
+                                                        $stmt = $mysqli->prepare($ret);
+                                                        $stmt->execute(); //ok
+                                                        $res = $stmt->get_result();
+                                                        while ($std = $res->fetch_object()) {
+                                                        ?>
+                                                            <option value="<?php echo $std->student_id; ?>"><?php echo $std->student_admno . ' - ' . $std->student_name; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="">Marks Aggregate</label>
+                                                    <input type="number" required name="marks_aggregate" class="form-control">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" name="add_teacher" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="add_marks" class="btn btn-primary">Submit</button>
                                         </div>
                                     </form>
                                 </div>
